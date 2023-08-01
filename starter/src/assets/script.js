@@ -5,28 +5,28 @@ const products = [
   price: 1.50,
   quantity:0,
   productId: 1,
-  image: '../images/cherry.jpg',
+  image: '../src/images/cherry.jpg',
 },
 {
   name:'Orange',
   price: 2.50,
   quantity:0,
   productId: 2,
-  image:'../images/orange.jpg',
+  image:'../src/images/orange.jpg',
 },
 {
   name:'Strawberry',
   price: 1.50,
   quantity:0,
   productId: 3,
-  image: '../images/strawberry.jpg',
+  image: '../src/images/strawberry.jpg',
 },
 {
   name:'Banana',
   price: 2.50,
   quantity:0,
   productId: 4,
-  image: '../images/banana.jpg',
+  image: '../src/images/banana.jpg',
 },
 ];
 /* Images provided in /images folder. All images from Unsplash.com
@@ -54,8 +54,7 @@ function addProductToCart(productId) {
     cart[currentCart].quantity++;
   } else {
     // If the product is not in the cart, add it with a quantity of 1
-    cart.push({ ...productToAdd });
-    cart[currentCart].quantity = 1;
+    cart.push({ ...productToAdd, quantity: 1 });
   }
   // Return true to indicate that the product was added to the cart
   return true;
