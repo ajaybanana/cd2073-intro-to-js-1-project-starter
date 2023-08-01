@@ -5,28 +5,28 @@ const products = [
   price: 1.50,
   quantity:0,
   productId: 1,
-  image: '../images/cherry.jpg',
+  image: '../src/images/cherry.jpg',
 },
 {
   name:'Orange',
   price: 2.50,
   quantity:0,
   productId: 2,
-  image:'../images/orange.jpg',
+  image:'../src/images/orange.jpg',
 },
 {
   name:'Strawberry',
   price: 1.50,
   quantity:0,
   productId: 3,
-  image: '../images/strawberry.jpg',
+  image: '../src/images/strawberry.jpg',
 },
 {
   name:'Banana',
   price: 2.50,
   quantity:0,
   productId: 4,
-  image: '../images/banana.jpg',
+  image: '../src/images/banana.jpg',
 },
 ];
 /* Images provided in /images folder. All images from Unsplash.com
