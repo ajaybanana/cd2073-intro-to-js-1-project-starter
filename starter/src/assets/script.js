@@ -117,6 +117,10 @@ return total;
 /* Create a function called emptyCart that empties the products from the cart */
 function emptyCart(){
   cart.splice(0,cart.length);
+  
+  products.forEach((product) => {
+    product.quantity = 0;
+  });
 };
 /* Create a function named pay that takes in an amount as an argument
   - pay will return a negative number if there is a remaining balance
@@ -124,8 +128,8 @@ function emptyCart(){
 */
 let remaining = 0;
 function pay(amount){
-   remaining = amount - cartTotal();
-   return remaining;
+   remaining += amount;
+   return remaining - cartTotal();
 };
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
