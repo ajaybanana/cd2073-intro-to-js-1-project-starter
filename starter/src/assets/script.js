@@ -1,57 +1,131 @@
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
-
-/* Create 3 or more product objects using object literal notation 
-   Each product should include five properties
-   - name: name of product (string)
-   - price: price of product (number)
-   - quantity: quantity in cart should start at zero (number)
-   - productId: unique id for the product (number)
-   - image: picture of product (url string)
-*/
-
+const products = [
+ {
+  name:'Cherry',
+  price: 1.50,
+  quantity:0,
+  productId: 1,
+  image: '../images/cherry.jpg',
+},
+{
+  name:'Orange',
+  price: 2.50,
+  quantity:0,
+  productId: 2,
+  image:'../images/orange.jpg',
+},
+{
+  name:'Strawberry',
+  price: 1.50,
+  quantity:0,
+  productId: 3,
+  image: '../images/strawberry.jpg',
+},
+{
+  name:'Banana',
+  price: 2.50,
+  quantity:0,
+  productId: 4,
+  image: '../images/banana.jpg',
+},
+];
 /* Images provided in /images folder. All images from Unsplash.com
    - cherry.jpg by Mae Mu
    - orange.jpg by Mae Mu
    - strawberry.jpg by Allec Gomes
+   - banana.jpg by Mockup Graphics
+   
 */
-
+ 
 /* Declare an empty array named cart to hold the items in the cart */
+const cart = [];
 
-/* Create a function named addProductToCart that takes in the product productId as an argument
-  - addProductToCart should get the correct product based on the productId
-  - addProductToCart should then increase the product's quantity
-  - if the product is not already in the cart, add it to the cart
+/* THIS FUNCTIONS WORKS DO NOT TOUCH IT*/
+function addProductToCart(productId) {
+  // Find the product with the given productId in the products array
+  const productToAdd = products.find((product) => product.productId === productId);
+  if (!productToAdd) {
+    return false;
+  }
+  // Check if the product is already in the cart
+  const currentCart = cart.findIndex((item) => item.productId === productId);
+  if (currentCart !== -1) {
+    // If the product is already in the cart, increase its quantity
+    cart[currentCart].quantity++;
+  } else {
+    // If the product is not in the cart, add it with a quantity of 1
+    cart.push({ ...productToAdd });
+    cart[currentCart].quantity = 1;
+  }
+  // Return true to indicate that the product was added to the cart
+  return true;
+};  
+/* THIS FUNCTION WORKS TOO DON'T TOUCH IT
 */
+function increaseQuantity(productId) {
+  // Find the product in the 'products' array based on the productId
+  const productToIncrease = products.find((product) => product.productId === productId);
+  // Check if the product is already in the cart
+  const cartIndex = cart.findIndex((item) => item.productId === productId);
+  if (cartIndex !== -1) {
+    // If the product is already in the cart, increase its quantity
+    cart[cartIndex].quantity++;
+  } else {
+    // If the product is not in the cart, add it with a quantity of 1
+    cart.push({ ...productToIncrease, quantity: 1 }); // Add quantity property to the product
+  }
+}
 
-/* Create a function named increaseQuantity that takes in the productId as an argument
-  - increaseQuantity should get the correct product based on the productId
-  - increaseQuantity should then increase the product's quantity
+/* THIS IS GREAT DON'T TOUCH IT
 */
-
-/* Create a function named decreaseQuantity that takes in the productId as an argument
-  - decreaseQuantity should get the correct product based on the productId
-  - decreaseQuantity should decrease the quantity of the product
-  - if the function decreases the quantity to 0, the product is removed from the cart
-*/
-
+function decreaseQuantity(productId) {
+  // Check if the product is already in the cart
+  const cartIndex = cart.findIndex((item) => item.productId === productId);
+  if (cartIndex !== -1) {
+    // If the product is in the cart, check if its quantity is greater than or equal to 2
+    if (cart[cartIndex].quantity >= 2) {
+      // If the quantity is greater than or equal to 2, decrease it by 1
+      cart[cartIndex].quantity--;
+    } else {
+      // If the quantity is 1, remove
+      cart[cartIndex].quantity = 0;
+      cart.splice(cartIndex,1);
+    }
+  }
+}
 /* Create a function named removeProductFromCart that takes in the productId as an argument
   - removeProductFromCart should get the correct product based on the productId
   - removeProductFromCart should update the product quantity to 0
   - removeProductFromCart should remove the product from the cart
 */
+function removeProductFromCart(productId) {
+  // Check if the product is in the cart based on its presence in the 'cart' array
+  const productIndexInCart = cart.findIndex(item => item.productId === productId);
+  if (productIndexInCart !== -1) {
+    // If the product is in the cart, set its quantity to 0 to effectively remove it from the cart
+    cart[productIndexInCart].quantity = 0;
+    cart.splice(productIndexInCart, 1);
+  }
+}
 
-/* Create a function named cartTotal that has no parameters
-  - cartTotal should iterate through the cart to get the total of all products
-  - cartTotal should return the sum of the products in the cart
-*/
-
+function cartTotal() {
+  let total = 0; 
+cart.forEach(product => {
+  total += product.price * product.quantity;
+});
+return total;
+};
 /* Create a function called emptyCart that empties the products from the cart */
-
+function emptyCart(){
+  cart.splice(0,cart.length);
+};
 /* Create a function named pay that takes in an amount as an argument
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
 */
-
+function pay(amountPaid){
+  return amountPaid - cartTotal();
+};
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
 
@@ -60,6 +134,7 @@
    Run the following command in terminal to run tests
    npm run test
 */
+
 
 module.exports = {
    products,
@@ -71,6 +146,5 @@ module.exports = {
    cartTotal,
    pay, 
    emptyCart,
-   /* Uncomment the following line if completing the currency converter bonus */
-   // currency
-}
+ // currency
+};
