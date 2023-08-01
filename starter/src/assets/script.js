@@ -5,28 +5,28 @@ const products = [
   price: 1.50,
   quantity:0,
   productId: 1,
-  image: '../src/images/cherry.jpg',
+  image: '../images/cherry.jpg',
 },
 {
   name:'Orange',
   price: 2.50,
   quantity:0,
   productId: 2,
-  image:'../src/images/orange.jpg',
+  image:'../images/orange.jpg',
 },
 {
   name:'Strawberry',
   price: 1.50,
   quantity:0,
   productId: 3,
-  image: '../src/images/strawberry.jpg',
+  image: '../images/strawberry.jpg',
 },
 {
   name:'Banana',
   price: 2.50,
   quantity:0,
   productId: 4,
-  image: '../src/images/banana.jpg',
+  image: '../images/banana.jpg',
 },
 ];
 /* Images provided in /images folder. All images from Unsplash.com
@@ -122,8 +122,10 @@ function emptyCart(){
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
 */
-function pay(amountPaid){
-  return amountPaid - cartTotal();
+let remaining = 0;
+function pay(amount){
+   remaining = amount - cartTotal();
+   return remaining;
 };
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
